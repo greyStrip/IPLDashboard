@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { MatchDetailCard } from '../components/MatchDetailCard';
 import { MatchSmallCard } from '../components/MatchSmallCard';
 
@@ -14,12 +14,13 @@ export const TeamPage = () =>{
     // making useEffect async is not allowed
     useEffect(
         () => {
-            const fetchMatches = async () => {
+            const fetchTeam = async () => {
                 const response = await fetch(`http://localhost:8080/team/${teamName}`);
                 const data = await response.json();
+                console.log(data);
                 setTeam(data);
             };
-            fetchMatches();
+            fetchTeam();
 
         // eslint-disable-next-line    
         }, [teamName]
@@ -49,7 +50,7 @@ export const TeamPage = () =>{
         </div>
         {team.matches.slice(1).map(match => <MatchSmallCard teamName={team.teamName} match={match} />)}
         <div className="more-link">
-          <a href="#">More ></a>
+          <Link to={`/teams/${teamName}/matches/${process.env.REACT_APP_DATA_END_YEAR}`}>More &gt;</Link>
         </div>
       </div>
     );

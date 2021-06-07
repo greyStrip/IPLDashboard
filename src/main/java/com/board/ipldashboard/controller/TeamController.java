@@ -32,6 +32,23 @@ public class TeamController {
 		this.matchRepository = matchRepository;
 	}
 
+	// @GetMapping("/team")
+	// public List<Team> getAllTeam(){
+	// 	log.info("Getting All Team Data "+TeamController.class);
+	// 	Iterable<Team> teams = this.teamRepository.findAll();
+	// 	List<Team> teamsList = new LinkedList<>();
+	// 	for (Team team : teams) {
+	// 		teamsList.add(team);
+	// 	}
+	// 	return teamsList;
+	// }
+
+	@GetMapping("/team")
+	public Iterable<Team> getAllTeam(){
+		log.info("Getting All Team Data "+TeamController.class);
+		return this.teamRepository.findAll();
+	}
+
 	@GetMapping("/team/{teamName}")
 	public Team getTeam(@PathVariable String teamName) {
 		log.info("Getting Team Data "+TeamController.class);
